@@ -7,13 +7,14 @@ import Map from '../components/Map'
 import useLocation from '../hooks/useLocation'
 import { Context as LocationContext } from '../context/LocationContext'
 import TrackForm from '../components/TrackForm'
+import {AntDesign} from '@expo/vector-icons'
 
 const TrackCreateScreen = ({ isFocused }) => {
     const { state:{recording}, addLocation } = useContext(LocationContext)
-    const callback = useCallback((location) => {
+    const callback = useCallback(location => {
         addLocation(location, recording)
     }, [recording])
-            const [err] = useLocation(isFocused || recording, callback)
+    const [err] = useLocation(isFocused || recording, callback)
     
 
     return(
@@ -24,6 +25,11 @@ const TrackCreateScreen = ({ isFocused }) => {
         <TrackForm/>
     </SafeAreaView>
     )
+}
+
+TrackCreateScreen.navigationOptions = {
+    title: 'Add Track',
+    tabBarIcon: <AntDesign name="pluscircle" size={20} />
 }
 
 const styles = StyleSheet.create({
